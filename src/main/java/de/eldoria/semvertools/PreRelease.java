@@ -1,14 +1,20 @@
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * Copyright (c) 2021 Eldoria
+ */
+
 package de.eldoria.semvertools;
 
 import java.util.List;
 
 public interface PreRelease extends Comparable<PreRelease> {
 
-    static PreRelease of(List<Identifier> identifiers) {
-        return new PreReleaseImpl(identifiers);
-    }
+  static PreRelease of(List<Identifier> identifiers) {
+    return new PreReleaseImpl(identifiers);
+  }
 
-    String asString();
+  String asString();
 
-    List<Identifier> identifiers();
+  List<Identifier> identifiers();
 }

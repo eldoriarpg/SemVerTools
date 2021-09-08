@@ -1,41 +1,45 @@
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * Copyright (c) 2021 Eldoria
+ */
+
 package de.eldoria.semvertools;
 
 import de.eldoria.semvertools.parser.SemVerLexer;
 import de.eldoria.semvertools.parser.SemVerParser;
-import de.eldoria.semvertools.parser.Token;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface SemanticVersion extends Comparable<SemanticVersion> {
 
-    static SemanticVersion of(int major, int minor, int patch) {
-        return new VersionCore(major, minor, patch);
-    }
+  static SemanticVersion of(int major, int minor, int patch) {
+    return new VersionCore(major, minor, patch);
+  }
 
-    static SemanticVersion parse(String version) {
-        SemVerLexer lexer = new SemVerLexer();
-        List<Token> tokens = lexer.lex(version);
-        return new SemVerParser(tokens).parse();
-    }
+  static SemanticVersion parse(String version) {
+    SemVerLexer lexer = new SemVerLexer();
+    return new SemVerParser(version, lexer.lex(version)).parse();
+  }
 
-    int major();
-    
-    int minor();
-    
-    int patch();
-    
-    Optional<PreRelease> preRelease();
+  int major();
 
-    Optional<Build> build();
+  int minor();
 
-    SemanticVersion withMajor(int major);
+  int patch();
 
-    SemanticVersion withMinor(int minor);
+  Optional<PreRelease> preRelease();
 
-    SemanticVersion withPatch(int patch);
+  Optional<Build> build();
 
-    SemanticVersion withPreRelease(PreRelease preRelease);
+  SemanticVersion withMajor(int major);
 
-    SemanticVersion withBuild(Build build);
+  SemanticVersion withMinor(int minor);
+
+  SemanticVersion withPatch(int patch);
+
+  SemanticVersion withPreRelease(@Nullable PreRelease preRelease);
+
+  SemanticVersion withBuild(@Nullable Build build);
 }

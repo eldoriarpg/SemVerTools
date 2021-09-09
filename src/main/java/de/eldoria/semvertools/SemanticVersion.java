@@ -8,10 +8,12 @@ package de.eldoria.semvertools;
 
 import de.eldoria.semvertools.parser.SemVerLexer;
 import de.eldoria.semvertools.parser.SemVerParser;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
+@ApiStatus.NonExtendable
 public interface SemanticVersion extends Comparable<SemanticVersion> {
 
   static SemanticVersion of(int major, int minor, int patch) {

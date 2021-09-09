@@ -6,12 +6,14 @@
 
 package de.eldoria.semvertools.parser;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Range;
 
 import java.util.Objects;
 import java.util.Optional;
 
-interface Token {
+@ApiStatus.NonExtendable
+public interface Token {
 
   TokenType type();
 

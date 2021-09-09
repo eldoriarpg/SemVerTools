@@ -6,9 +6,12 @@
 
 package de.eldoria.semvertools.parser;
 
+import org.jetbrains.annotations.ApiStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiStatus.Internal
 public class SemVerLexer {
 
   public List<Token> lex(String versionString) {

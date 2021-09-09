@@ -6,6 +6,9 @@
 
 package de.eldoria.semvertools.parser;
 
+import org.jetbrains.annotations.ApiStatus;
+
+@ApiStatus.Internal
 public enum TokenType {
   NUMERIC,
   ALPHABETIC,

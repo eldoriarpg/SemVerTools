@@ -6,8 +6,11 @@
 
 package de.eldoria.semvertools;
 
+import org.jetbrains.annotations.ApiStatus;
+
 import java.util.List;
 
+@ApiStatus.NonExtendable
 public interface Build {
 
   static Build of(List<Identifier> identifiers) {

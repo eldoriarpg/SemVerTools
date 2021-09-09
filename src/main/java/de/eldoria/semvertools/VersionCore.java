@@ -6,11 +6,13 @@
 
 package de.eldoria.semvertools;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.Optional;
 
+@ApiStatus.Internal
 public final class VersionCore implements SemanticVersion {
   private final int major;
   private final int minor;

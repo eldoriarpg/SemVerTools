@@ -6,6 +6,9 @@
 
 package de.eldoria.semvertools;
 
+import org.jetbrains.annotations.ApiStatus;
+
+@ApiStatus.NonExtendable
 public interface Identifier extends Comparable<Identifier> {
 
   static Identifier of(int num) {

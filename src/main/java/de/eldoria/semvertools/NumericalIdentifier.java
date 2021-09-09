@@ -6,8 +6,6 @@
 
 package de.eldoria.semvertools;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 final class NumericalIdentifier implements Identifier {

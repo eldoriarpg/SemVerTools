@@ -7,9 +7,11 @@
 package de.eldoria.semvertools.parser;
 
 import de.eldoria.semvertools.*;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.*;
 
+@ApiStatus.Internal
 public class SemVerParser {
 
   private final String rawVersionString;

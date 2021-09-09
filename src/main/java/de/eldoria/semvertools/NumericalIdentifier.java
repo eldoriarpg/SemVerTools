@@ -1,10 +1,12 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- * Copyright (c) 2021 Eldoria
+ * Copyright (c) 2021 SemVerTools team and contributors
  */
 
 package de.eldoria.semvertools;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 

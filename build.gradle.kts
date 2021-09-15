@@ -123,6 +123,6 @@ class PublishData(private val project: Project) {
         SNAPSHOT("-SNAPSHOT", "https://eldonexus.de/repository/maven-snapshots/", true);
 
         fun append(name: String, appendCommit: Boolean, commitHash: String): String =
-            name.plus(append).plus(if (appendCommit && addCommit) "-".plus(commitHash) else "")
+            name.plus(append).plus(if (appendCommit && addCommit) "+".plus(commitHash) else "")
     }
 }

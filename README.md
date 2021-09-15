@@ -31,7 +31,39 @@ if (next.succeeds(current)) {
 
 ## Using this library
 
-As this library is in an early development state, it is not deployed to any maven repository.
+### Gradle
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://eldonexus.de/repository/maven-public")
+    }
+}
+
+dependencies {
+    implementation("de.eldoria", "semvertools", "{version}")
+}
+```
+
+### Maven
+
+```xml
+    <repositories>
+        <repository>
+            <id>EldoNexus</id>
+            <url>https://eldonexus.de/repository/maven-public</url>
+        </repository>
+    </repositories>
+    
+    <dependencies>
+        <dependency>
+            <groupId>de.eldoria</groupId>
+            <artifactId>semvertools</artifactId>
+            <version>{version}</version>
+        </dependency>
+    </dependencies>
+
+```
 
 ## Contributing to this project
 

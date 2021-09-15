@@ -1,3 +1,11 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/eldoriarpg/semvertools/Verify%20state?style=for-the-badge&label=Build)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/eldoriarpg/semvertools/Publish%20to%20Nexus?style=for-the-badge&label=Publish)
+
+[![Sonatype Nexus (Releases)](https://img.shields.io/nexus/maven-releases/de.eldoria/semvertools?label=Release&logo=Release&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_releases]
+[![Sonatype Nexus (Development)](https://img.shields.io/nexus/maven-dev/de.eldoria/semvertools?label=DEV&logo=Release&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_dev]
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/de.eldoria/semvertools?color=orange&label=Snapshot&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_releases]
+
+
 # SemVerTools
 
 This is a Java library providing tooling for semantic versioning.
@@ -41,3 +49,7 @@ If you have any questions, feel free to [start a discussion](https://github.com/
 ## License
 
 SemVerTools is licenced under the MIT license.
+
+[nexus_releases]: https://eldonexus.de/#browse/browse:maven-releases:de%2Feldoria%2Fsemvertools
+[nexus_snapshots]: https://eldonexus.de/#browse/browse:maven-snapshots:de%2Feldoria%2Fsemvertools
+[nexus_dev]: https://eldonexus.de/#browse/browse:maven-dev:de%2Feldoria%2Fsemvertools

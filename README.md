@@ -3,7 +3,7 @@
 
 [![Sonatype Nexus (Releases)](https://img.shields.io/nexus/maven-releases/de.eldoria/semvertools?label=Release&logo=Release&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_releases]
 [![Sonatype Nexus (Development)](https://img.shields.io/nexus/maven-dev/de.eldoria/semvertools?label=DEV&logo=Release&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_dev]
-[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/de.eldoria/semvertools?color=orange&label=Snapshot&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_releases]
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/de.eldoria/semvertools?color=orange&label=Snapshot&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_snapshots]
 
 
 # SemVerTools

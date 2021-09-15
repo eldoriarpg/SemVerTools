@@ -18,7 +18,6 @@ repositories {
 }
 
 dependencies {
-
     compileOnly("org.jetbrains", "annotations", "22.0.0")
 
     annotationProcessor("com.uber.nullaway", "nullaway", "0.9.2")
@@ -53,6 +52,10 @@ tasks {
                 option("NullAway:AnnotatedPackages", "de.eldoria.semvertools")
             }
         }
+    }
+
+    compileTestJava{
+        options.encoding = "UTF-8"
     }
 
 }

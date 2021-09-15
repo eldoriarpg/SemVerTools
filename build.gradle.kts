@@ -10,7 +10,7 @@ plugins {
     id("me.champeau.jmh") version "0.6.5"
 }
 
-group = "de.eldoria.semvertools"
+group = "de.eldoria"
 version = "1.0.0-alpha"
 
 repositories {

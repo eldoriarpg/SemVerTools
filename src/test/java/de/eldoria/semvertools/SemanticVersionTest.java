@@ -33,6 +33,8 @@ public class SemanticVersionTest {
       "01.1.0",
       "1.01.0",
       "0.0.01",
+      // leading zeroes are not allowed for numeric pre-release identifiers
+      "1.0.0-001",
   })
   void test_failOnInvalid(String invalid) {
     assertThrows(VersionParseException.class, () -> SemanticVersion.parse(invalid));

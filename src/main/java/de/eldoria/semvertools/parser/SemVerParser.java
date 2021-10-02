@@ -7,6 +7,7 @@
 package de.eldoria.semvertools.parser;
 
 import de.eldoria.semvertools.*;
+import de.eldoria.semvertools.util.Integers;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.*;
@@ -64,8 +65,9 @@ public class SemVerParser {
     Token token = this.tokens.element();
     switch (token.type()) {
       case NUMERIC:
-        int i = Integer.parseInt(token.id()
-            .orElseThrow(() -> new IllegalStateException("NUMERIC without id")));
+        var id = token.id().orElseThrow(() -> new IllegalStateException("NUMERIC without id"));
+        int i = Integers.parseNonNegativeInt(id)
+            .orElseThrow(() -> new VersionParseException("pre-release must not include leading zeroes"));
         identifiers.add(Identifier.of(i));
         this.tokens.remove();
         break;

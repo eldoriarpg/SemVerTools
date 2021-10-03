@@ -10,6 +10,9 @@ is expected to be non-null. It is recommended to avoid any nullable types.
 
 A Pull Request should **always** only modify one aspect.
 
+Feature, Performance and Refactor Pull Requests are meant to target the `develop` branch.
+Chore and Bug Fix Pull Requests are meant to target the `master` branch.
+
 The title of your pull request should start with its type: 
 - `feature:` for features 
 - `bug:` for bug fixes

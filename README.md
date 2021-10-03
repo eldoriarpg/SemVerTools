@@ -5,6 +5,9 @@
 [![Sonatype Nexus (Development)](https://img.shields.io/nexus/maven-dev/de.eldoria/semvertools?label=DEV&logo=Release&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_dev]
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/de.eldoria/semvertools?color=orange&label=Snapshot&server=https%3A%2F%2Feldonexus.de&style=for-the-badge)][nexus_snapshots]
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/eldoriarpg/SemVerTools.svg?logo=lgtm&logoWidth=18&style=for-the-badge)][lgtm_alerts]
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/eldoriarpg/SemVerTools.svg?logo=lgtm&logoWidth=18&style=for-the-badge)][lgtm_code_quality_java]
+
 
 # SemVerTools
 
@@ -85,3 +88,5 @@ SemVerTools is licenced under the MIT license.
 [nexus_releases]: https://eldonexus.de/#browse/browse:maven-releases:de%2Feldoria%2Fsemvertools
 [nexus_snapshots]: https://eldonexus.de/#browse/browse:maven-snapshots:de%2Feldoria%2Fsemvertools
 [nexus_dev]: https://eldonexus.de/#browse/browse:maven-dev:de%2Feldoria%2Fsemvertools
+[lgtm_alerts]: https://lgtm.com/projects/g/eldoriarpg/SemVerTools/alerts/
+[lgtm_code_quality_java]: https://lgtm.com/projects/g/eldoriarpg/SemVerTools/context:java

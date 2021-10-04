@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SemanticVersionTest {
+class SemanticVersionTest {
   @ParameterizedTest
   @ValueSource(strings = {
       // don't allow totally random strings

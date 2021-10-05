@@ -22,9 +22,7 @@ public interface Identifier extends Comparable<Identifier> {
 
   static Identifier of(String alphanumeric) {
     return Integers.parseNonNegativeInt(alphanumeric)
-        .stream() // why is there no direct mapToObj on OptionalInt?
-        .mapToObj(Identifier::of)
-        .findFirst()
+        .map(Identifier::of)
         .or(alphanumeric(alphanumeric))
         .orElseThrow(() -> new IllegalStateException("not a valid identifier: '" + alphanumeric + "'"));
   }

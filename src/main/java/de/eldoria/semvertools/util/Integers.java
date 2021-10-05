@@ -8,7 +8,7 @@ package de.eldoria.semvertools.util;
 
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.OptionalInt;
+import java.util.Optional;
 
 /**
  * A utility class for operations on integers.
@@ -23,29 +23,29 @@ public enum Integers {
    * This method does not accept strings with leading zeroes besides {@code "0"} itself.
    *
    * @param value the value to parse.
-   * @return the parsed int wrapped by the OptionalInt, or {@link OptionalInt#empty()} if
+   * @return the parsed int wrapped by the OptionalInt, or {@link Optional#empty()} if
    * parsing was not successful.
    */
-  public static OptionalInt parseNonNegativeInt(String value) {
+  public static Optional<Integer> parseNonNegativeInt(String value) {
     if (value.isEmpty()) {
-      return OptionalInt.empty();
+      return Optional.empty();
     }
     // leading zeroes are not allowed
     if (value.charAt(0) == '0' && value.length() > 1) {
-      return OptionalInt.empty();
+      return Optional.empty();
     }
     int result = 0;
-      for (int i = 0; i < value.length(); i++) {
-        int charAsInt = Character.digit(value.charAt(i), 10);
-        if (charAsInt < 0 || charAsInt > 9) {
-          return OptionalInt.empty();
-        }
-        result = 10 * result + charAsInt;
-        if (result < 0) { // overflow
-          return OptionalInt.empty();
-        }
+    for (int i = 0; i < value.length(); i++) {
+      int charAsInt = Character.digit(value.charAt(i), 10);
+      if (charAsInt < 0 || charAsInt > 9) {
+        return Optional.empty();
       }
-    return OptionalInt.of(result);
+      result = 10 * result + charAsInt;
+      if (result < 0) { // overflow
+        return Optional.empty();
+      }
+    }
+    return Optional.of(result);
   }
 
   public static void assertNonNegative(int value) {

@@ -6,11 +6,20 @@
 
 package de.eldoria.semvertools.parser;
 
-import de.eldoria.semvertools.*;
+import de.eldoria.semvertools.Build;
+import de.eldoria.semvertools.Identifier;
+import de.eldoria.semvertools.PreRelease;
+import de.eldoria.semvertools.SemanticVersion;
+import de.eldoria.semvertools.VersionCore;
 import de.eldoria.semvertools.util.Integers;
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.Queue;
 
 @ApiStatus.Internal
 public class SemVerParser {

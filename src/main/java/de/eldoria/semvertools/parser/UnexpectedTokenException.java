@@ -6,6 +6,8 @@
 
 package de.eldoria.semvertools.parser;
 
+import de.eldoria.semvertools.VersionParseException;
+
 import java.util.Arrays;
 
 public class UnexpectedTokenException extends VersionParseException {

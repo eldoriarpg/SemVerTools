@@ -6,7 +6,6 @@
 
 package de.eldoria.semvertools;
 
-import de.eldoria.semvertools.parser.VersionParseException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

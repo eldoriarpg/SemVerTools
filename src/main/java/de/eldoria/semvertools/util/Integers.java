@@ -23,7 +23,7 @@ public enum Integers {
    * This method does not accept strings with leading zeroes besides {@code "0"} itself.
    *
    * @param value the value to parse.
-   * @return the parsed int wrapped by the OptionalInt, or {@link Optional#empty()} if
+   * @return the parsed int wrapped by the Optional, or {@link Optional#empty()} if
    * parsing was not successful.
    */
   public static Optional<Integer> parseNonNegativeInt(String value) {

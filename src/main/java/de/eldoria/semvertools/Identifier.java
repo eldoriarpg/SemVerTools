@@ -12,6 +12,9 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * @apiNote This interface is not meant to be implemented and might become {@code sealed} in future releases.
+ */
 @ApiStatus.NonExtendable
 public interface Identifier extends Comparable<Identifier> {
 

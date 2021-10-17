@@ -20,6 +20,8 @@ import java.util.Optional;
  * <p>
  * The natural order of semantic versions is defined in <a href="https://semver.org/#spec-item-11">the spec</a>.
  * @since 1.0.0
+ *
+ * @apiNote This interface is not meant to be implemented and might become {@code sealed} in future releases.
  */
 @ApiStatus.NonExtendable
 public interface SemanticVersion extends Comparable<SemanticVersion> {
@@ -43,7 +45,7 @@ public interface SemanticVersion extends Comparable<SemanticVersion> {
    *
    * @param version the raw version string.
    * @return the parsed version.
-   * @throws de.eldoria.semvertools.parser.VersionParseException if the given string does not express
+   * @throws de.eldoria.semvertools.VersionParseException if the given string does not express
    *                                                             a valid semantic version.
    */
   static SemanticVersion parse(String version) {
@@ -132,6 +134,16 @@ public interface SemanticVersion extends Comparable<SemanticVersion> {
    */
   SemanticVersion withMinor(int minor);
 
+  /**
+   * Increases the minor version by 1.
+   * <p>
+   * This is equivalent to <pre>{@code
+   * SemanticVersion version = ...;
+   * version = version.withMinor(version.minor() + 1);
+   * }</pre>
+   *
+   * @return the semantic version with a minor version greater by 1 to this minor version.
+   */
   default SemanticVersion increaseMinor() {
     return this.withMinor(this.minor() + 1);
   }
@@ -147,6 +159,16 @@ public interface SemanticVersion extends Comparable<SemanticVersion> {
    */
   SemanticVersion withPatch(int patch);
 
+  /**
+   * Increases the patch version by 1.
+   * <p>
+   * This is equivalent to <pre>{@code
+   * SemanticVersion version = ...;
+   * version = version.withPatch(version.patch() + 1);
+   * }</pre>
+   *
+   * @return the semantic version with a minor version greater by 1 to this minor version.
+   */
   default SemanticVersion increasePatch() {
     return this.withPatch(this.patch() + 1);
   }
@@ -207,9 +229,11 @@ public interface SemanticVersion extends Comparable<SemanticVersion> {
    * patch version, pre-release version and build metadata are equal. This differs from
    * {@link SemanticVersion#compareTo(Object)}, as build metadata is considered
    * for the {@code equals} method only. If you want to check if two semantic versions are equal, you can:
+   * <ul>
    * <li>strip the build metadata before using this method</li>
    * <li>use {@code versionA.compareTo(versionB) == 0}</li>
    * <li>use {@code !(versionA.succeeds(versionB) || versionA.precedes(versionB))}</li>
+   * </ul>
    *
    * @param o the object to compare to.
    * @return {@code true} if both semantic versions are equal.

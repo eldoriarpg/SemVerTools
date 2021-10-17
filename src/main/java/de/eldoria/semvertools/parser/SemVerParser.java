@@ -34,14 +34,13 @@ public class SemVerParser {
 
   public SemanticVersion parse() {
     try {
-      VersionCore versionCore = parseVersionCore();
-      return parseOptional(versionCore);
+      return parseOptional(parseVersionCore());
     } catch (VersionParseException e) {
       throw new VersionParseException("Failed to parse version string '" + rawVersionString + "'", e);
     }
   }
 
-  private SemanticVersion parseOptional(VersionCore core) {
+  private SemanticVersion parseOptional(SemanticVersion core) {
     if (this.tokens.isEmpty()) {
       return core;
     }
@@ -56,7 +55,7 @@ public class SemVerParser {
     }
   }
 
-  private SemanticVersion parsePreRelease(VersionCore version) {
+  private SemanticVersion parsePreRelease(SemanticVersion version) {
     List<Identifier> identifiers = new ArrayList<>();
     while (true) {
       parsePreReleaseIdentifier(identifiers);
@@ -108,13 +107,13 @@ public class SemVerParser {
     }
   }
 
-  private VersionCore parseVersionCore() {
+  private SemanticVersion parseVersionCore() {
     int major = parseNumeric();
     expect(TokenType.DOT);
     int minor = parseNumeric();
     expect(TokenType.DOT);
     int patch = parseNumeric();
-    return (VersionCore) SemanticVersion.of(major, minor, patch);
+    return SemanticVersion.of(major, minor, patch);
   }
 
   private Token expect(TokenType type) {

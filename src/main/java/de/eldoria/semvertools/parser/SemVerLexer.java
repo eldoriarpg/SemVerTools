@@ -6,6 +6,7 @@
 
 package de.eldoria.semvertools.parser;
 
+import de.eldoria.semvertools.VersionParseException;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;

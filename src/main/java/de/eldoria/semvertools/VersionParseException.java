@@ -4,7 +4,7 @@
  * Copyright (c) 2021 SemVerTools team and contributors
  */
 
-package de.eldoria.semvertools.parser;
+package de.eldoria.semvertools;
 
 public class VersionParseException extends RuntimeException {
 

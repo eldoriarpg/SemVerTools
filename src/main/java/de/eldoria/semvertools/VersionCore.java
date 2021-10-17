@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ApiStatus.Internal
-public final class VersionCore implements SemanticVersion {
+final class VersionCore implements SemanticVersion {
   private final int major;
   private final int minor;
   private final int patch;

@@ -32,7 +32,7 @@ public class SemVerLexer {
     int head = 0;
     boolean alphabetic = false;
     boolean numeric = false;
-    boolean foundHyphen = false; // first hyphen indicates start of pre-release
+    boolean beforePreRelease = true; // whether we're before a possible pre-release part
     for (; head < versionString.length(); head++) {
       switch (versionString.charAt(head)) {
         case '.':
@@ -52,9 +52,10 @@ public class SemVerLexer {
           alphabetic = false;
           numeric = false;
           tokens.add(Token.of(TokenType.PLUS, mark));
+          beforePreRelease = false; // a pre-release can't appear after a build
           break;
         case '-':
-          if (!foundHyphen) {
+          if (beforePreRelease) {
             if (mark < head) {
               tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
             }
@@ -62,7 +63,7 @@ public class SemVerLexer {
             alphabetic = false;
             numeric = false;
             tokens.add(Token.of(TokenType.HYPHEN, mark));
-            foundHyphen = true;
+            beforePreRelease = false;
             break;
           } // fallthrough otherwise, it's part of an alphanumeric string
         default:

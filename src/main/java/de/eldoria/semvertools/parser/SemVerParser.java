@@ -10,7 +10,7 @@ import de.eldoria.semvertools.Build;
 import de.eldoria.semvertools.Identifier;
 import de.eldoria.semvertools.PreRelease;
 import de.eldoria.semvertools.SemanticVersion;
-import de.eldoria.semvertools.VersionCore;
+import de.eldoria.semvertools.VersionParseException;
 import de.eldoria.semvertools.util.Integers;
 import org.jetbrains.annotations.ApiStatus;
 

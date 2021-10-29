@@ -74,11 +74,11 @@ class SemVerLexerTest {
 
   @Test
   void test_lexPlusDashDot() {
-    String pdd = "+-.";
+    String pdd = "-+.";
     List<Token> lex = this.semVerLexer.lex(pdd);
     assertEquals(3, lex.size());
-    assertEquals(Token.of(TokenType.PLUS, 0), lex.get(0));
-    assertEquals(Token.of(TokenType.HYPHEN, 1), lex.get(1));
+    assertEquals(Token.of(TokenType.HYPHEN, 0), lex.get(0));
+    assertEquals(Token.of(TokenType.PLUS, 1), lex.get(1));
     assertEquals(Token.of(TokenType.DOT, 2), lex.get(2));
   }
 

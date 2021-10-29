@@ -6,10 +6,20 @@
 
 package de.eldoria.semvertools.parser;
 
-import de.eldoria.semvertools.*;
+import de.eldoria.semvertools.Build;
+import de.eldoria.semvertools.Identifier;
+import de.eldoria.semvertools.PreRelease;
+import de.eldoria.semvertools.SemanticVersion;
+import de.eldoria.semvertools.VersionParseException;
+import de.eldoria.semvertools.util.Integers;
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.Queue;
 
 @ApiStatus.Internal
 public class SemVerParser {
@@ -63,8 +73,9 @@ public class SemVerParser {
     Token token = this.tokens.element();
     switch (token.type()) {
       case NUMERIC:
-        int i = Integer.parseInt(token.id()
-            .orElseThrow(() -> new IllegalStateException("NUMERIC without id")));
+        var id = token.id().orElseThrow(() -> new IllegalStateException("NUMERIC without id"));
+        int i = Integers.parseNonNegativeInt(id)
+            .orElseThrow(() -> new VersionParseException("pre-release must not include leading zeroes"));
         identifiers.add(Identifier.of(i));
         this.tokens.remove();
         break;
@@ -83,16 +94,43 @@ public class SemVerParser {
   }
 
   private SemanticVersion parseBuild(SemanticVersion version) {
-    // TODO allow dash
     List<Identifier> identifiers = new ArrayList<>();
     while (true) {
-      parsePreReleaseIdentifier(identifiers);
+      parseBuildIdentifier(identifiers);
       if (tokens.isEmpty()) {
         return version.withBuild(Build.of(identifiers));
       }
       Token next = this.tokens.remove();
       if (next.type() == TokenType.DOT) continue;
       throw new UnexpectedTokenException(tokens.element(), TokenType.DOT);
+    }
+  }
+
+  private void parseBuildIdentifier(List<Identifier> identifiers) {
+    Token token = this.tokens.element();
+    switch (token.type()) {
+      case NUMERIC:
+        var id = token.id().orElseThrow(() -> new IllegalStateException("NUMERIC without id"));
+        Optional<Integer> parsed = Integers.parseNonNegativeInt(id);
+        if (parsed.isPresent()) {
+          identifiers.add(Identifier.of(parsed.get()));
+        } else {
+          // we parse numerical build identifiers as alphanumeric to keep leading zeroes.
+          identifiers.add(Identifier.of(id));
+        }
+        this.tokens.remove();
+        break;
+      case ALPHABETIC:
+      case ALPHANUMERIC:
+        String alphanumeric = token.id()
+            .orElseThrow(() -> new IllegalStateException(token.type() + " without id"));
+        identifiers.add(Identifier.of(alphanumeric));
+        this.tokens.remove();
+        break;
+      case HYPHEN: // hyphens are allowed
+
+      default:
+        throw new UnexpectedTokenException(token);
     }
   }
 

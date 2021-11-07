@@ -61,7 +61,7 @@ license {
     header(project.file("HEADER.txt"))
 }
 
-java{
+java {
     withJavadocJar()
     withSourcesJar()
 }

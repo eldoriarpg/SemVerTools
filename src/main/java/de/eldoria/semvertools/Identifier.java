@@ -13,16 +13,31 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
+ * Represents either an alphanumeric or a numerical identifier.
+ * Identifiers are {@link Comparable} as described in <a href="https://semver.org/#spec-item-11">Item 11</a> of the spec.
+ *
  * @apiNote This interface is not meant to be implemented and might become {@code sealed} in future releases.
  */
 @ApiStatus.NonExtendable
 public interface Identifier extends Comparable<Identifier> {
 
+  /**
+   * Returns a numerical identifier representing the given non-negative integer.
+   *
+   * @param num a non-negative integer value.
+   * @return a numerical identifier for the given integer.
+   */
   static Identifier of(int num) {
     Integers.assertNonNegative(num);
     return new NumericalIdentifier(num);
   }
 
+  /**
+   * Returns an alphanumeric identifier for the given string.
+   *
+   * @param alphanumeric a string only containing alphanumeric characters.
+   * @return a new alphanumeric identifier.
+   */
   static Identifier of(String alphanumeric) {
     return Integers.parseNonNegativeInt(alphanumeric)
         .map(Identifier::of)
@@ -47,5 +62,11 @@ public interface Identifier extends Comparable<Identifier> {
     };
   }
 
+  /**
+   * Returns a {@link String} representation of this identifier. This normally equals
+   * the string it was parsed from.
+   *
+   * @return a string representation of this identifier.
+   */
   String asString();
 }

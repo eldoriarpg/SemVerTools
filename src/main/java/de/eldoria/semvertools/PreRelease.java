@@ -39,7 +39,7 @@ public interface PreRelease extends Comparable<PreRelease> {
    * Returns the list of identifiers represented by this pre-release.
    * The returned list is unmodifiable.
    *
-   * @return the list of identifiers
+   * @return the list of identifiers.
    */
   List<Identifier> identifiers();
 }

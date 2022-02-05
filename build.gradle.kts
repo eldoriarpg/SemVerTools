@@ -32,7 +32,9 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
-    sourceCompatibility = JavaVersion.VERSION_11;
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
 }
 
 tasks {
@@ -55,15 +57,14 @@ tasks {
     compileTestJava{
         options.encoding = "UTF-8"
     }
+
+    javadoc {
+        (options as StandardJavadocDocletOptions).tags?.add("apiNote:a:API Note")
+    }
 }
 
 license {
     header(project.file("HEADER.txt"))
-}
-
-java {
-    withJavadocJar()
-    withSourcesJar()
 }
 
 publishData {

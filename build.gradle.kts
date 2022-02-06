@@ -24,9 +24,9 @@ dependencies {
     errorprone("com.google.errorprone", "error_prone_core", "2.9.0")
     errorproneJavac("com.google.errorprone", "javac", "9+181-r4173-1")
 
-    testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.7.2")
-    testImplementation("org.junit.jupiter", "junit-jupiter-params", "5.7.2")
-    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.7.2")
+    testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.8.2")
+    testImplementation("org.junit.jupiter", "junit-jupiter-params", "5.8.2")
+    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.8.2")
 }
 
 java {

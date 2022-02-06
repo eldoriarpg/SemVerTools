@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ApiStatus.NonExtendable
+@ApiStatus.Internal
 public interface Token {
 
   TokenType type();

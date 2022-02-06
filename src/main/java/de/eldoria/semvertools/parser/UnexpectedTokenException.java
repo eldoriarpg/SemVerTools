@@ -7,9 +7,11 @@
 package de.eldoria.semvertools.parser;
 
 import de.eldoria.semvertools.VersionParseException;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Arrays;
 
+@ApiStatus.Internal
 public class UnexpectedTokenException extends VersionParseException {
   private final Token token;
 

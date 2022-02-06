@@ -14,4 +14,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v4.2.5
+        with:
+          fail-threshold: 1
 

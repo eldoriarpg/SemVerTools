@@ -36,20 +36,30 @@ final class PreReleaseImpl implements PreRelease {
     int smaller = Math.min(this.identifiers.size(), identifiers.size());
     for (int i = 0; i < smaller; i++) {
       int cmp = this.identifiers.get(i).compareTo(identifiers.get(i));
-      if (cmp != 0) return cmp;
+      if (cmp != 0) {
+        return cmp;
+      }
     }
     return Integer.compare(this.identifiers.size(), identifiers.size());
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     PreReleaseImpl that = (PreReleaseImpl) o;
-    if (this.identifiers.size() != that.identifiers.size()) return false;
+    if (this.identifiers.size() != that.identifiers.size()) {
+      return false;
+    }
     for (Iterator<Identifier> thisIter = this.identifiers.iterator(), thatIter = that.identifiers.iterator();
          thisIter.hasNext() && thatIter.hasNext(); ) {
-      if (!thisIter.next().equals(thatIter.next())) return false;
+      if (!thisIter.next().equals(thatIter.next())) {
+        return false;
+      }
     }
     return true;
   }

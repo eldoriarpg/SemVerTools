@@ -21,7 +21,7 @@ class SemVerLexerTest {
 
   @BeforeEach
   public void setup() {
-    this.semVerLexer = new SemVerLexer();
+    this.semVerLexer = SemVerLexer.create();
   }
 
   @ParameterizedTest

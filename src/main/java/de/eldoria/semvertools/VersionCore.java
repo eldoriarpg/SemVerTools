@@ -75,33 +75,43 @@ final class VersionCore implements SemanticVersion {
     if (this.patch != o.patch()) {
       return Integer.compare(this.patch, o.patch());
     }
-    if (o.preRelease().isPresent()) return 1; // pre release is always less than a release
+    if (o.preRelease().isPresent()) {
+      return 1; // pre release is always less than a release
+    }
     return 0;
   }
 
   @Override
   public SemanticVersion withPreRelease(@Nullable PreRelease preRelease) {
-    if (preRelease == null) return this;
+    if (preRelease == null) {
+      return this;
+    }
     return new FullVersion(this, preRelease, null);
   }
 
   @Override
   public SemanticVersion withBuild(@Nullable Build build) {
-    if (build == null) return this;
+    if (build == null) {
+      return this;
+    }
     return new FullVersion(this, null, build);
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     VersionCore that = (VersionCore) o;
-    return major == that.major && minor == that.minor && patch == that.patch;
+    return this.major == that.major && this.minor == that.minor && this.patch == that.patch;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(major, minor, patch);
+    return Objects.hash(this.major, this.minor, this.patch);
   }
 
   @Override

@@ -13,21 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApiStatus.Internal
-public class SemVerLexer {
+public final class SemVerLexer {
+  private final List<Token> tokens;
+
+  private SemVerLexer() {
+    this.tokens = new ArrayList<>();
+  }
+
+  public static SemVerLexer create() {
+    return new SemVerLexer();
+  }
 
   public List<Token> lex(String versionString) {
     try {
-      return lexInternal(versionString);
+      lexInternal(versionString);
     } catch (VersionParseException e) {
       throw new VersionParseException("Could not parse version string '" + versionString + "'", e);
     }
+    return List.copyOf(this.tokens);
   }
 
-  private List<Token> lexInternal(String versionString) {
+  private void lexInternal(String versionString) {
     if (versionString.isEmpty() || versionString.trim().isEmpty()) {
       throw new VersionParseException("versionString must not be blank");
     }
-    List<Token> tokens = new ArrayList<>();
     int mark = 0;
     int head = 0;
     boolean alphabetic = false;
@@ -37,35 +46,36 @@ public class SemVerLexer {
       switch (versionString.charAt(head)) {
         case '.':
           if (mark < head) {
-            tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
+            this.tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
           }
           mark = head + 1;
           alphabetic = false;
           numeric = false;
-          tokens.add(Token.of(TokenType.DOT, mark));
+          this.tokens.add(Token.of(TokenType.DOT, mark));
           break;
         case '+':
           if (mark < head) {
-            tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
+            this.tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
           }
           mark = head + 1;
           alphabetic = false;
           numeric = false;
-          tokens.add(Token.of(TokenType.PLUS, mark));
+          this.tokens.add(Token.of(TokenType.PLUS, mark));
           beforePreRelease = false; // a pre-release can't appear after a build
           break;
         case '-':
           if (beforePreRelease) {
             if (mark < head) {
-              tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
+              this.tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
             }
             mark = head + 1;
             alphabetic = false;
             numeric = false;
-            tokens.add(Token.of(TokenType.HYPHEN, mark));
+            this.tokens.add(Token.of(TokenType.HYPHEN, mark));
             beforePreRelease = false;
             break;
-          } // fallthrough otherwise, it's part of an alphanumeric string
+          }
+          // fallthrough otherwise, it's part of an alphanumeric string
         default:
           alphabetic |= isAlphabetic(versionString.charAt(head));
           numeric |= isNumeric(versionString.charAt(head));
@@ -73,20 +83,21 @@ public class SemVerLexer {
       }
     }
     if (mark < head) {
-      tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
+      this.tokens.add(produceToken(versionString, alphabetic, numeric, mark, head));
     }
-    return tokens;
   }
 
-  private boolean isAlphabetic(char c) {
-    return ('a' <= c && 'z' >= c) || ('A' <= c && 'Z' >= c) || c == '-';
+  private static boolean isAlphabetic(char c) {
+    boolean isLowerCase = c >= 'a' && c <= 'z';
+    boolean isUpperCase = c >= 'A' && c <= 'Z';
+    return isLowerCase || isUpperCase || c == '-';
   }
 
-  private boolean isNumeric(char c) {
-    return '0' <= c && '9' >= c;
+  private static boolean isNumeric(char c) {
+    return c >= '0' && c <= '9';
   }
 
-  private Token produceToken(String full, boolean alphabetic, boolean numeric, int start, int end) {
+  private static Token produceToken(String full, boolean alphabetic, boolean numeric, int start, int end) {
     String id = full.substring(start, end);
     if (alphabetic && numeric) {
       return Token.of(TokenType.ALPHANUMERIC, id, start, end - 1);

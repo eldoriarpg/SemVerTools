@@ -25,6 +25,6 @@ public class UnexpectedTokenException extends VersionParseException {
   }
 
   public Token getToken() {
-    return token;
+    return this.token;
   }
 }

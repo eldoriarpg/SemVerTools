@@ -15,5 +15,5 @@ public enum TokenType {
   ALPHANUMERIC,
   DOT,
   HYPHEN,
-  PLUS;
+  PLUS,
 }

@@ -36,7 +36,7 @@ public class SemVerParser {
     try {
       return parseOptional(parseVersionCore());
     } catch (VersionParseException e) {
-      throw new VersionParseException("Failed to parse version string '" + rawVersionString + "'", e);
+      throw new VersionParseException("Failed to parse version string '" + this.rawVersionString + "'", e);
     }
   }
 
@@ -44,8 +44,8 @@ public class SemVerParser {
     if (this.tokens.isEmpty()) {
       return core;
     }
-    Token token;
-    switch ((token = tokens.remove()).type()) {
+    Token token = this.tokens.remove();
+    switch (token.type()) {
       case HYPHEN:
         return parsePreRelease(core);
       case PLUS:
@@ -59,17 +59,21 @@ public class SemVerParser {
     List<Identifier> identifiers = new ArrayList<>();
     while (true) {
       parsePreReleaseIdentifier(identifiers);
-      if (tokens.isEmpty()) {
+      if (this.tokens.isEmpty()) {
         return version.withPreRelease(PreRelease.of(identifiers));
       }
       Token next = this.tokens.remove();
-      if (next.type() == TokenType.DOT) continue;
-      if (next.type() == TokenType.PLUS) return parseBuild(version.withPreRelease(PreRelease.of(identifiers)));
-      throw new UnexpectedTokenException(tokens.element(), TokenType.DOT, TokenType.PLUS);
+      if (next.type() == TokenType.DOT) {
+        continue;
+      }
+      if (next.type() == TokenType.PLUS) {
+        return parseBuild(version.withPreRelease(PreRelease.of(identifiers)));
+      }
+      throw new UnexpectedTokenException(this.tokens.element(), TokenType.DOT, TokenType.PLUS);
     }
   }
 
-  private void parsePreReleaseIdentifier(List<Identifier> identifiers) {
+  private void parsePreReleaseIdentifier(List<? super Identifier> identifiers) {
     Token token = this.tokens.element();
     switch (token.type()) {
       case NUMERIC:
@@ -97,16 +101,18 @@ public class SemVerParser {
     List<Identifier> identifiers = new ArrayList<>();
     while (true) {
       parseBuildIdentifier(identifiers);
-      if (tokens.isEmpty()) {
+      if (this.tokens.isEmpty()) {
         return version.withBuild(Build.of(identifiers));
       }
       Token next = this.tokens.remove();
-      if (next.type() == TokenType.DOT) continue;
-      throw new UnexpectedTokenException(tokens.element(), TokenType.DOT);
+      if (next.type() == TokenType.DOT) {
+        continue;
+      }
+      throw new UnexpectedTokenException(this.tokens.element(), TokenType.DOT);
     }
   }
 
-  private void parseBuildIdentifier(List<Identifier> identifiers) {
+  private void parseBuildIdentifier(List<? super Identifier> identifiers) {
     Token token = this.tokens.element();
     switch (token.type()) {
       case NUMERIC:
@@ -144,9 +150,9 @@ public class SemVerParser {
   }
 
   private Token expect(TokenType type) {
-    expectNotEmpty(tokens.isEmpty());
-    Token token;
-    if ((token = tokens.remove()).type() != type) {
+    expectNotEmpty(this.tokens.isEmpty());
+    Token token = this.tokens.remove();
+    if (token.type() != type) {
       throw new UnexpectedTokenException(token, type);
     }
     return token;
@@ -157,22 +163,28 @@ public class SemVerParser {
     String id = expect.id()
         .flatMap(s -> s.trim().isEmpty() ? Optional.empty() : Optional.of(s))
         .orElseThrow(() -> new IllegalArgumentException("NUMERIC without id"));
-    if (id.length() == 1 && id.charAt(0) == '0') return 0;
-    if (id.charAt(0) == '0') throw new VersionParseException("No leading zero allowed");
+    if (id.length() == 1 && id.charAt(0) == '0') {
+      return 0;
+    }
+    if (id.charAt(0) == '0') {
+      throw new VersionParseException("No leading zero allowed");
+    }
     return parseInt(id);
   }
 
-  private int parseInt(String raw) {
+  private static int parseInt(String raw) {
     int result = 0;
     for (int i = 0; i < raw.length(); i++) {
       int charAsInt = raw.charAt(i) - '0';
-      if (charAsInt < 0 || charAsInt > 9) throw new NumberFormatException(raw);
+      if (charAsInt < 0 || charAsInt > 9) {
+        throw new NumberFormatException(raw);
+      }
       result = 10 * result + charAsInt;
     }
     return result;
   }
 
-  private void expectNotEmpty(boolean empty) {
+  private static void expectNotEmpty(boolean empty) {
     if (empty) {
       throw new VersionParseException("Expected more tokens");
     }

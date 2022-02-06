@@ -87,11 +87,13 @@ final class FullVersion implements SemanticVersion {
 
   @Override
   public int compareTo(SemanticVersion o) {
-    int cmp = versionCore.compareTo(o.withBuild(null).withPreRelease(null)); // produce a VersionCore
+    int cmp = this.versionCore.compareTo(o.withBuild(null).withPreRelease(null)); // produce a VersionCore
     if (cmp == 0 && o instanceof VersionCore) {
       return -1; // this is definitely smaller if version-core is equal but only this is a pre-release
     }
-    if (cmp != 0) return cmp; // version-core already differs
+    if (cmp != 0) {
+      return cmp; // version-core already differs
+    }
     FullVersion fullVersion = (FullVersion) o;
     if (this.preRelease == null && fullVersion.preRelease != null) {
       return 1;
@@ -107,8 +109,12 @@ final class FullVersion implements SemanticVersion {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     FullVersion that = (FullVersion) o;
     return this.versionCore.equals(that.versionCore)
         && Objects.equals(this.preRelease, that.preRelease)
@@ -117,7 +123,7 @@ final class FullVersion implements SemanticVersion {
 
   @Override
   public int hashCode() {
-    return Objects.hash(versionCore, preRelease, build);
+    return Objects.hash(this.versionCore, this.preRelease, this.build);
   }
 
   @Override

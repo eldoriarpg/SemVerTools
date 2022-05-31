@@ -27,14 +27,18 @@ final class AlphanumericIdentifier implements Identifier {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     AlphanumericIdentifier that = (AlphanumericIdentifier) o;
-    return identifier.equals(that.identifier);
+    return this.identifier.equals(that.identifier);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(identifier);
+    return Objects.hash(this.identifier);
   }
 }

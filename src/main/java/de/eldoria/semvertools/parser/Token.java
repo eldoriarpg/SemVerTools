@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ApiStatus.NonExtendable
+@ApiStatus.Internal
 public interface Token {
 
   TokenType type();
@@ -40,14 +41,14 @@ public interface Token {
   final class SimpleToken extends AbstractToken {
     private final TokenType type;
 
-    public SimpleToken(TokenType type, int start, int end) {
+    private SimpleToken(TokenType type, int start, int end) {
       super(start, end);
       this.type = type;
     }
 
     @Override
     public TokenType type() {
-      return type;
+      return this.type;
     }
 
     @Override
@@ -57,20 +58,24 @@ public interface Token {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
       SimpleToken that = (SimpleToken) o;
-      return type == that.type;
+      return this.type == that.type;
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(type);
+      return Objects.hash(this.type);
     }
 
     @Override
     public String toString() {
-      return "(" + type + ')';
+      return "(" + this.type + ')';
     }
   }
 
@@ -78,7 +83,7 @@ public interface Token {
     private final TokenType type;
     private final String id;
 
-    public IdToken(TokenType type, String id, int start, int end) {
+    private IdToken(TokenType type, String id, int start, int end) {
       super(start, end);
       this.type = type;
       this.id = id;
@@ -86,30 +91,34 @@ public interface Token {
 
     @Override
     public TokenType type() {
-      return type;
+      return this.type;
     }
 
     @Override
     public Optional<String> id() {
-      return Optional.of(id);
+      return Optional.of(this.id);
     }
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
       IdToken idToken = (IdToken) o;
-      return type == idToken.type && id.equals(idToken.id);
+      return this.type == idToken.type && this.id.equals(idToken.id);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(type, id);
+      return Objects.hash(this.type, this.id);
     }
 
     @Override
     public String toString() {
-      return "(" + type + ", " + id + ')';
+      return "(" + this.type + ", " + this.id + ')';
     }
   }
 
@@ -124,12 +133,12 @@ public interface Token {
 
     @Override
     public @Range(from = 0, to = Integer.MAX_VALUE) int start() {
-      return start;
+      return this.start;
     }
 
     @Override
     public @Range(from = 0, to = Integer.MAX_VALUE) int end() {
-      return start;
+      return this.start;
     }
   }
 }

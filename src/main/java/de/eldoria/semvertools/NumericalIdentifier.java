@@ -6,6 +6,8 @@
 
 package de.eldoria.semvertools;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 final class NumericalIdentifier implements Identifier {
@@ -16,7 +18,7 @@ final class NumericalIdentifier implements Identifier {
   }
 
   @Override
-  public int compareTo(Identifier o) {
+  public int compareTo(@NotNull Identifier o) {
     if (o instanceof NumericalIdentifier) {
       return Integer.compare(this.number, ((NumericalIdentifier) o).number);
     }
@@ -30,14 +32,18 @@ final class NumericalIdentifier implements Identifier {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     NumericalIdentifier that = (NumericalIdentifier) o;
-    return number == that.number;
+    return this.number == that.number;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(number);
+    return Objects.hash(this.number);
   }
 }

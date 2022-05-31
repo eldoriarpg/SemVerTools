@@ -45,11 +45,11 @@ public interface SemanticVersion extends Comparable<SemanticVersion> {
    *
    * @param version the raw version string.
    * @return the parsed version.
-   * @throws de.eldoria.semvertools.VersionParseException if the given string does not express
+   * @throws VersionParseException if the given string does not express
    *                                                             a valid semantic version.
    */
   static SemanticVersion parse(String version) {
-    SemVerLexer lexer = new SemVerLexer();
+    SemVerLexer lexer = SemVerLexer.create();
     return new SemVerParser(version, lexer.lex(version)).parse();
   }
 

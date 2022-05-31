@@ -6,7 +6,6 @@
 
 package de.eldoria.semvertools;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +15,7 @@ final class BuildImpl implements Build {
   private final List<Identifier> identifiers;
 
   BuildImpl(List<Identifier> identifiers) {
-    this.identifiers = identifiers;
+    this.identifiers = List.copyOf(identifiers);
   }
 
   @Override
@@ -26,25 +25,33 @@ final class BuildImpl implements Build {
 
   @Override
   public List<Identifier> identifiers() {
-    return Collections.unmodifiableList(this.identifiers);
+    return this.identifiers;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     BuildImpl that = (BuildImpl) o;
-    if (this.identifiers.size() != that.identifiers.size()) return false;
+    if (this.identifiers.size() != that.identifiers.size()) {
+      return false;
+    }
     for (Iterator<Identifier> thisIter = this.identifiers.iterator(),
          thatIter = that.identifiers.iterator();
          thisIter.hasNext() && thatIter.hasNext(); ) {
-      if (!thisIter.next().equals(thatIter.next())) return false;
+      if (!thisIter.next().equals(thatIter.next())) {
+        return false;
+      }
     }
     return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(identifiers);
+    return Objects.hash(this.identifiers);
   }
 }

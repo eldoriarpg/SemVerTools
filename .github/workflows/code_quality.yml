@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v4.2.5
+        uses: JetBrains/qodana-action@v5.1.0
         with:
           fail-threshold: 1
 

@@ -5,7 +5,7 @@ plugins {
     java
     `maven-publish`
     id("org.cadixdev.licenser") version "0.6.1"
-    id("net.ltgt.errorprone") version "2.0.2"
+    id("net.ltgt.errorprone") version "3.0.1"
     id("me.champeau.jmh") version "0.6.8"
     id("de.chojo.publishdata") version "1.0.1"
 }

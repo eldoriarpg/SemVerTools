@@ -21,7 +21,7 @@ dependencies {
     compileOnly("org.jetbrains", "annotations", "24.0.0")
 
     annotationProcessor("com.uber.nullaway", "nullaway", "0.10.9")
-    errorprone("com.google.errorprone", "error_prone_core", "2.16")
+    errorprone("com.google.errorprone", "error_prone_core", "2.18.0")
     errorproneJavac("com.google.errorprone", "javac", "9+181-r4173-1")
 
     testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.9.2")

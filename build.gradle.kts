@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.jetbrains", "annotations", "24.0.0")
+    compileOnly("org.jetbrains", "annotations", "24.1.0")
 
     annotationProcessor("com.uber.nullaway", "nullaway", "0.10.9")
     errorprone("com.google.errorprone", "error_prone_core", "2.18.0")

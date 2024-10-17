@@ -7,7 +7,7 @@ plugins {
     id("org.cadixdev.licenser") version "0.6.1"
     id("net.ltgt.errorprone") version "3.0.1"
     id("me.champeau.jmh") version "0.6.8"
-    id("de.chojo.publishdata") version "1.0.1"
+    id("de.chojo.publishdata") version "1.4.0"
 }
 
 group = "de.eldoria"
